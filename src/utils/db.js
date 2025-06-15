@@ -5,11 +5,11 @@ dotenv.config();
 export const db = knex({
     client: 'pg',
     connection: {
-        host: process.env.DB_HOST || 'db',
+        host: process.env.DB_HOST || 'dpg-d178sn6mcj7s73ctss10-a.singapore-postgres.render.com',
         port: process.env.DB_PORT || 5432,
-        database: process.env.DB_NAME || 'postgres',
-        user: process.env.DB_USER || 'postgres',
-        password: process.env.DB_PASSWORD || 'postgres'
+        database: process.env.DB_NAME || 'dev_nishant_db',
+        user: process.env.DB_USER || 'dev_nishant_db_user',
+        password: process.env.DB_PASSWORD || 'LXxkIb0SCFVnDnsvyoMAkTI1Vxn6LlPF'
     }
 });
 
