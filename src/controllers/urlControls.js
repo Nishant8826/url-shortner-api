@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { TryCatch } from '../middlewares/error.js';
 import ErrorHandler from "../utils/utility-class.js";
 import { db } from '../utils/db.js';
-import { client } from '../utils/cache.js';
+// import { client } from '../utils/cache.js';
 
 
 export const shorten = TryCatch(async (req, res, next) => {
@@ -30,15 +30,15 @@ export const getShorten = TryCatch(async (req, res, next) => {
     const { code } = req.params;
     if (!code) return next(new ErrorHandler('code is required', 400));
 
-    const cache = await client.get('code:' + code);
+    // const cache = await client.get('code:' + code);
     let result;
-    if (cache) {
-        result = JSON.parse(cache);
-    } else {
-        result = await db('url_shortener').where({ short_code: code }).first();
-        if (!result) return next(new ErrorHandler('code not found!', 404));
-        await client.set('code:' + result.short_code, JSON.stringify(result), { EX: 60 * 60 * 24 });
-    }
+    // if (cache) {
+    //     result = JSON.parse(cache);
+    // } else {
+    result = await db('url_shortener').where({ short_code: code }).first();
+    if (!result) return next(new ErrorHandler('code not found!', 404));
+    //     await client.set('code:' + result.short_code, JSON.stringify(result), { EX: 60 * 60 * 24 });
+    // }
 
     const ip = '192.168.1.8';
     const referrer = req.headers.referer || 'dev';
