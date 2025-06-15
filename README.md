@@ -1,3 +1,13 @@
+## Live Project
+
+View the live application here: [URL Shortener Client](https://url-shortener-client-lake.vercel.app/)  
+
+## Client Code
+
+[https://github.com/Nishant8826/url-shortener-client.git](https://github.com/Nishant8826/url-shortener-client.git)
+
+---
+
 # URL Shortener
 
 A simple **URL Shortener** application that converts long URLs into short, more manageable codes.
@@ -24,25 +34,24 @@ Built with **Node.js**, **Postgres**, and **Redis**.
 - Allows retrieving total number of redirects, last few accesses, referrer breakdown, and country statistics.
 
 ---
+
 ## 🔹 API Endpoints
 
-### Shorten URL POST /shorten
-
+### Shorten URL `POST /shorten`
 - **Input:** Long URL
 - **Output:** Shortened code (e.g., `abc123`)
 - Stores long → short mapping in the database.
 
-### Redirect GET /:code
-- Redirect user to the original long URL
-- Log metadata (timestamp, IP, referrer)
+### Redirect `GET /:code`
+- Redirects the user to the original long URL.
+- Logs metadata (timestamp, IP, referrer).
 
-### Analytics GET /analytics/:code
-- Return:
-- Number of redirects
-- Timestamps of last few accesses
-- Referrer breakdown
-- Country/IP stats (mock allowed)
-
+### Analytics `GET /analytics/:code`
+- **Response:**
+  - Number of redirects
+  - Timestamps of last few accesses
+  - Referrer breakdown
+  - Country/IP statistics (mock allowed)
 
 ---
 
@@ -51,4 +60,4 @@ Built with **Node.js**, **Postgres**, and **Redis**.
 1️⃣ **Clone this repository:**
 
 ```bash
-git clone https://github.com/yourUsername/url_shortener.git
+git clone https://github.com/Nishant8826/url-shortener.git
