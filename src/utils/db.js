@@ -10,7 +10,7 @@ export const db = knex({
         database: process.env.DB_NAME || 'url_shortener' ,
         user: process.env.DB_USER || 'postgres',
         password: process.env.DB_PASSWORD || 'admin',
-        ssl: false 
+        ssl: true 
     }
 });
 
