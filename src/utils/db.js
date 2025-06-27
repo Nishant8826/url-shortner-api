@@ -5,16 +5,17 @@ dotenv.config();
 export const db = knex({
     client: 'pg',
     connection: {
-        host: process.env.DB_HOST,
-        port: process.env.DB_PORT,
-        database: process.env.DB_NAME,
-        user: process.env.DB_USER,
-        password: process.env.DB_PASSWORD,
-        ssl: { rejectUnauthorized: false }
+        host: process.env.DB_HOST || 'localhost',
+        port: process.env.DB_PORT || 5432,
+        database: process.env.DB_NAME || 'url_shortener' ,
+        user: process.env.DB_USER || 'postgres',
+        password: process.env.DB_PASSWORD || 'admin',
+        ssl: false 
     }
 });
 
 (async () => {
+
     try {
 
         await db.schema.hasTable('url_shortener').then(async (exists) => {
@@ -38,6 +39,22 @@ export const db = knex({
                     table.timestamp('accessed_at').defaultTo(db.fn.now());
                 });
                 console.log('url_access_logs table successfully created');
+            }
+        });
+        await db.schema.hasTable('applicationusers').then(async (exists) => {
+            if (!exists) {
+                await db.schema.createTable('applicationusers', (table) => {
+                        table.increments('userId').primary(); 
+                        table.string('firebase_uid'); 
+                        table.string('email').notNullable().unique();
+                        table.string('display_name');
+                        table.string('password').notNullable();
+                        table.string('photo_url');
+                        table.jsonb('provider_info'); 
+                        table.timestamp('created_at').defaultTo(db.fn.now());
+
+                });
+                console.log('applicationusers table successfully created');
             }
         });
         console.log('DB connected successfully');
